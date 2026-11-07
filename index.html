@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>
+window.__DEVFILE_PREVIEW_QUERY_CLEANUP__=true;
+(function(){
+    if(!window.history || typeof window.history.replaceState!== "function"){return;}
+    if(!window.location || !window.location.search){return;}
+    window.history.replaceState(null, "", window.location.pathname+window.location.hash);
+})();
+</script>
+<base href="preview0em15ehb">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>萝卜凉心小店</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                primary: '#E74C3C',
+            },
+            fontFamily: {
+                sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            },
+        }
+    }
+}
+</script>
+<style type="text/tailwindcss">
+@layer utilities {
+    .pb-safe { padding-bottom: calc(4rem + env(safe-area-inset-bottom)); }
+    .bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
+    .content-auto { content-visibility: auto; }
+}
+input, select, textarea { font-size: 16px !important; }
+/* 防止iOS自动缩放 */
+.toast {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.75); color: white; padding: 12px 24px; border-radius: 8px;
+    z-index: 100; font-size: 14px; animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.ad-box{
+    z-index:99;
+}
+</style>
+<style>
+*, ::before, ::after{
+    --tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;
+    --tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;
+    --tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;
+    --tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;
+    --tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;
+    --tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;
+    --tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: ;
+}
+::backdrop{
+    --tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;
+    --tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;
+    --tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;
+    --tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;
+    --tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;
+    --tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;
+    --tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: ;
+}
+</style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+<div class="max-w-lg mx-auto bg-white min-h-screen shadow-sm relative">
+    <h1 id="page-title" class="hidden"></h1>
+    <!-- 广告悬浮框 右下角 -->
+    <div id="ad-box" class="ad-box fixed bottom-[70px] right-3 max-w-[140px] bg-primary text-white p-2 rounded-lg shadow-lg relative cursor-pointer" onclick="window.open('https://4madtug83etp8.doubao.link/app/app_17gr0snf4cw','_blank')">
+        <button class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-gray-800 rounded-full text-xs flex items-center justify-center" onclick="event.stopPropagation();closeAd()">✕</button>
+        <div class="text-xs">萝卜OJ在线题库</div>
+        <div class="text-[10px] opacity-80 mt-0.5">点我前往刷题</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <main id="app-content" class="p-4">
+    </main>
+
+    <!-- 底部导航 -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-lg mx-auto bg-white border-t border-gray-200 bottom-nav grid grid-cols-4 z-20">
+        <button class="nav-btn flex flex-col items-center py-2 text-sm text-gray-500" data-tab="dashboard">
+            <span class="text-xl mb-0.5">📊</span>
+            <span>看板</span>
+        </button>
+        <button class="nav-btn flex flex-col items-center py-2 text-sm text-gray-500" data-tab="record">
+            <span class="text-xl mb-0.5">✍️</span>
+            <span>记账</span>
+        </button>
+        <button class="nav-btn flex flex-col items-center py-2 text-sm text-gray-500" data-tab="details">
+            <span class="text-xl mb-0.5">📋</span>
+            <span>明细</span>
+        </button>
+        <button class="nav-btn flex flex-col items-center py-2 text-sm text-primary" data-tab="mine">
+            <span class="text-xl mb-0.5">⚙️</span>
+            <span>我的</span>
+        </button>
+    </nav>
+</div>
+
+<script>
+    // 常量配置 店名修改为萝卜凉心小店
+    const STORE_NAME = '萝卜凉心小店';
+    const PAYMENT_METHODS = [
+        { id: 'wechat', name: '微信', icon: '💬', color: '#07C160' },
+        { id: 'alipay', name: '支付宝', icon: '💙', color: '#1677FF' },
+        { id: 'meituan', name: '美团', icon: '🛵', color: '#FFC300' },
+        { id: 'eleme', name: '饿了么', icon: '🍔', color: '#0091FF' },
+        { id: 'cash', name: '线下现金', icon: '💵', color: '#FF6B35' }
+    ];
+    const STORAGE_KEYS = {
+        sales: 'store_sales_records_v2',
+        expenses: 'store_expense_records_v2',
+        settings: 'store_settings_v2'
+    };
+
+    // 全局状态
+    let currentTab = 'dashboard';
+    let sales = [];
+    let expenses = {};
+    let settings = { dailyTarget: 0 };
+    let selectedMethod = 'wechat';
+    let trendChart = null;
+    let detailsSubTab = 'sales';
+
+    // 广告关闭函数
+    function closeAd(){
+        document.getElementById('ad-box').style.display = 'none';
+    }
+
+    // 初始化
+    function init() {
+        loadData();
+        bindNavEvents();
+        renderTab();
+    }
+
+    // 数据存储相关
+    let backupFileHandle = null;  // 用户授权的本地备份文件句柄（支持自动写入的浏览器使用）
+    
+    function loadData() {
+        const savedSales = localStorage.getItem(STORAGE_KEYS.sales);
+        const savedExpenses = localStorage.getItem(STORAGE_KEYS.expenses);
+        const savedSettings = localStorage.getItem(STORAGE_KEYS.settings);
+        
+        sales = savedSales ? JSON.parse(savedSales) : [];
+        const rawExpenses = savedExpenses ? JSON.parse(savedExpenses) : {};
+        // 兼容旧数据：如果某天支出是对象格式 {amount, note}，提取amount；同时强制转数字
+        expenses = {};
+        Object.keys(rawExpenses).forEach(d => {
+            const v = rawExpenses[d];
+            expenses[d] = typeof v === 'object' ? Number(v.amount ?? 0) : Number(v ?? 0);
+        });
+        settings = savedSettings ? JSON.parse(savedSettings) : { dailyTarget: 0 };
+    }
+
+    async function saveData() {
+        localStorage.setItem(STORAGE_KEYS.sales, JSON.stringify(sales));
+        localStorage.setItem(STORAGE_KEYS.expenses, JSON.stringify(expenses));
+        localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(settings));
+        
+        // 如果用户已授权本地备份文件，自动写入最新数据
+        if (backupFileHandle) {
+            try {
+                await writeBackupToFile();
+            } catch (e) {
+                console.warn('自动备份失败，权限可能已失效', e);
+                backupFileHandle = null;
+            }
+        }
+    }
+    
+    // 写入备份数据到已授权的本地文件
+    async function writeBackupToFile() {
+        if (!backupFileHandle) return;
+        const allData = { 
+            sales, 
+            expenses, 
+            exportDate: getTodayStr(), 
+            store: STORE_NAME,
+            updateTime: new Date().toISOString()
+        };
+        const writable = await backupFileHandle.createWritable();
+        await writable.write(JSON.stringify(allData, null, 2));
+        await writable.close();
+    }
+
+    // 日期工具
+    function getTodayStr() {
+        const d = new Date();
+        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+
+    function isToday(dateStr) {
+        return dateStr === getTodayStr();
+    }
+
+    function formatDate(dateStr) {
+        const d = new Date(dateStr);
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        const todayStr = getTodayStr();
+        const yesterdayStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth()+1).padStart(2,'0')}-${String(yesterday.getDate()).padStart(2,'0')}`;
+        
+        if (dateStr === todayStr) return '今天';
+        if (dateStr === yesterdayStr) return '昨天';
+        return `${d.getMonth()+1}月${d.getDate()}日`;
+    }
+
+    // 计算工具
+    function calcTodayStats() {
+        const today = getTodayStr();
+        const todaySales = sales.filter(r => r.date === today);
+        const todayRevenue = todaySales.reduce((sum, r) => sum + r.amount, 0);
+        const todayExpense = Number(expenses[today] ?? 0);
+        const todayProfit = todayRevenue - todayExpense;
+        
+        const channelStats = {};
+        PAYMENT_METHODS.forEach(m => channelStats[m.id] = 0);
+        todaySales.forEach(r => {
+            channelStats[r.method] = (channelStats[r.method] ?? 0) + r.amount;
+        });
+        
+        return { todayRevenue, todayExpense, todayProfit, channelStats };
+    }
+
+    function calcPeriodStats(days) {
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - days + 1);
+        
+        let totalRevenue = 0;
+        let totalExpense = 0;
+        let totalDays = 0;
+        
+        const dailyData = [];
+        for (let i = days - 1; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+            
+            const daySales = sales.filter(r => r.date === dateStr);
+            const dayRevenue = daySales.reduce((sum, r) => sum + r.amount, 0);
+            const dayExpense = Number(expenses[dateStr] ?? 0);
+            
+            totalRevenue += dayRevenue;
+            totalExpense += dayExpense;
+            if (dayRevenue > 0 || dayExpense > 0) totalDays++;
+            
+            dailyData.push({
+                date: dateStr,
+                label: `${d.getMonth()+1}/${d.getDate()}`,
+                revenue: dayRevenue,
+                expense: dayExpense
+            });
+        }
+        
+        return {
+            totalRevenue,
+            totalExpense,
+            totalProfit: totalRevenue - totalExpense,
+            dailyAvg: totalDays > 0 ? totalRevenue / totalDays : 0,
+            dailyData
+        };
+    }
+
+    // Toast提示
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 1500);
+    }
+
+    // 渲染看板
+    function renderDashboard() {
+        document.getElementById('page-title').textContent = '经营看板';
+        const { todayRevenue, todayExpense, todayProfit, channelStats } = calcTodayStats();
+        const weekStats = calcPeriodStats(7);
+        const monthStats = calcPeriodStats(30);
+        
+        const profitColor = todayProfit >= 0 ? 'text-green-600' : 'text-red-600';
+        const profitSign = todayProfit >= 0 ? '+' : '';
+        
+        let channelHtml = '';
+        PAYMENT_METHODS.forEach(m => {
+            const amount = channelStats[m.id] ?? 0;
+            channelHtml += `
+                <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                    <div class="flex items-center">
+                        <span class="text-lg mr-2">${m.icon}</span>
+                        <span class="text-gray-700">${m.name}</span>
+                    </div>
+                    <span class="font-semibold">¥${amount.toFixed(2)}</span>
+                </div>
+            `;
+        });
+        
+        const html = `
+            <!-- 门店名称 -->
+            <div class="text-center mb-4">
+                <h2 class="text-xl font-bold text-gray-800">${STORE_NAME}</h2>
+                <p class="text-sm text-gray-500">${getTodayStr()}</p>
+            </div>
+
+            <!-- 今日核心数据 -->
+            <div class="grid grid-cols-3 gap-3 mb-5">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-3 text-center">
+                    <p class="text-xs text-gray-600 mb-1">今日营业额</p>
+                    <p class="text-lg font-bold text-red-600">¥${todayRevenue.toFixed(2)}</p>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-3 text-center">
+                    <p class="text-xs text-gray-600 mb-1">今日支出</p>
+                    <p class="text-lg font-bold text-orange-600">¥${todayExpense.toFixed(2)}</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-3 text-center">
+                    <p class="text-xs text-gray-600 mb-1">今日净利润</p>
+                    <p class="text-lg font-bold ${profitColor}">${profitSign}¥${todayProfit.toFixed(2)}</p>
+                </div>
+            </div>
+
+            <!-- 今日各渠道收入 -->
+            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-5">
+                <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                    <span class="mr-2">💰</span>今日各渠道收入
+                </h3>
+                <div class="space-y-1">
+                    ${channelHtml}
+                </div>
+            </div>
+
+            <!-- 周期汇总 -->
+            <div class="grid grid-cols-3 gap-3 mb-5">
+                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                    <p class="text-xs text-gray-500 mb-1">近7天营业额</p>
+                    <p class="text-base font-semibold text-gray-800">¥${weekStats.totalRevenue.toFixed(2)}</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                    <p class="text-xs text-gray-500 mb-1">本月营业额</p>
+                    <p class="text-base font-semibold text-gray-800">¥${monthStats.totalRevenue.toFixed(2)}</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                    <p class="text-xs text-gray-500 mb-1">日均(30天)</p>
+                    <p class="text-base font-semibold text-gray-800">¥${monthStats.dailyAvg.toFixed(2)}</p>
+                </div>
+            </div>
+
+            <!-- 趋势图 -->
+            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-5">
+                <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                    <span class="mr-2">📈</span>近7天收支趋势
+                </h3>
+                <canvas id="trendChart" height="200"></canvas>
+            </div>
+
+            <!-- 经营体检 -->
+            <div class="bg-blue-50 rounded-xl p-4 mb-4">
+                <h3 class="font-semibold text-blue-800 mb-2 flex items-center">
+                    <span class="mr-2">💡</span>经营小提示
+                </h3>
+                <div class="text-sm text-blue-700 space-y-1">
+                    <p>• 近7天总利润 ¥${weekStats.totalProfit.toFixed(2)}，平均每天 ¥${(weekStats.totalProfit/7).toFixed(2)}</p>
+                    <p>• 本月已记录 ${monthStats.dailyData.filter(d => d.revenue > 0).length} 天有营业记录</p>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('app-content').innerHTML = html;
+        setTimeout(() => renderTrendChart(weekStats.dailyData), 50);
+    }
+
+    function renderTrendChart(dailyData) {
+        const ctx = document.getElementById('trendChart');
+        if (!ctx) return;
+        
+        if (trendChart) trendChart.destroy();
+        
+        trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dailyData.map(d => d.label),
+                datasets: [
+                    {
+                        label: '营业额',
+                        data: dailyData.map(d => d.revenue),
+                        borderColor: '#E74C3C',
+                        backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3
+                    },
+                    {
+                        label: '支出',
+                        data: dailyData.map(d => d.expense),
+                        borderColor: '#F39C12',
+                        backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 6 } }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // 渲染记账页
+    function renderRecord() {
+        document.getElementById('page-title').textContent = '记账';
+        const today = getTodayStr();
+        const todayExpense = Number(expenses[today] ?? 0);
+        
+        let methodHtml = '';
+        PAYMENT_METHODS.forEach((m, idx) => {
+            const active = selectedMethod === m.id;
+            methodHtml += `
+                <button class="method-btn flex-1 flex flex-col items-center py-3 rounded-lg border-2 transition-all ${active ? 'border-primary bg-red-50' : 'border-gray-200 bg-white'}"
+                    data-method="${m.id}">
+                    <span class="text-xl mb-1">${m.icon}</span>
+                    <span class="text-sm ${active ? 'text-primary font-medium' : 'text-gray-600'}">${m.name}</span>
+                </button>
+            `;
+        });
+        
+        const quickAmounts = [10, 20, 50, 100, 200, 500, 1000];
+        let quickHtml = '';
+        quickAmounts.forEach(a => {
+            quickHtml += `<button class="quick-amount px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors" data-amount="${a}">¥${a}</button>`;
+        });
+        
+        const html = `
+            <!-- 记收入 -->
+            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-5">
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="mr-2">💰</span>记一笔收入
+                </h3>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">收款方式</label>
+                    <div class="flex gap-2">
+                        ${methodHtml}
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">收入金额</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-gray-500">¥</span>
+                        <input type="number" id="amount-input" step="0.01" min="0" placeholder="0.00"
+                            class="w-full pl-8 pr-4 py-3 text-xl font-semibold border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                    </div>
+                </div>
+                
+                <div class="mb-4 flex flex-wrap gap-2">
+                    ${quickHtml}
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">备注（可选）</label>
+                    <input type="text" id="note-input" placeholder="比如：大单、外卖备注等"
+                        class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">日期</label>
+                    <input type="date" id="date-input" value="${today}"
+                        class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                </div>
+                
+                <button id="save-income-btn" class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-red-600 transition-colors">
+                    保存收入
+                </button>
+            </div>
+
+            <!-- 记支出 -->
+            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-5">
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="mr-2">💸</span>记当日支出
+                    ${todayExpense > 0 ? `<span class="ml-auto text-sm text-orange-600">今日已记 ¥${todayExpense.toFixed(2)}（再次保存覆盖）</span>` : ''}
+                </h3>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">支出金额</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-gray-500">¥</span>
+                        <input type="number" id="expense-amount-input" step="0.01" min="0" placeholder="0.00" value="${todayExpense > 0 ? todayExpense : ''}"
+                            class="w-full pl-8 pr-4 py-3 text-xl font-semibold border border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">支出备注（可选）</label>
+                    <input type="text" id="expense-note-input" placeholder="比如：进货、房租、水电等"
+                        class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-600 mb-2">日期</label>
+                    <input type="date" id="expense-date-input" value="${today}"
+                        class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+                </div>
+                
+                <button id="save-expense-btn" class="w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">
+                    保存支出
+                </button>
+            </div>
+        `;
+        
+        document.getElementById('app-content').innerHTML = html;
+        
+        // 绑定事件
+        document.querySelectorAll('.method-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedMethod = btn.dataset.method;
+                renderRecord();
+            });
+        });
+        
+        document.querySelectorAll('.quick-amount').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('amount-input').value = btn.dataset.amount;
+            });
+        });
+        
+        document.getElementById('save-income-btn').addEventListener('click', saveIncome);
+        document.getElementById('save-expense-btn').addEventListener('click', saveExpense);
+    }
+
+    function saveIncome() {
+        const amount = parseFloat(document.getElementById('amount-input').value);
+        const note = document.getElementById('note-input').value.trim();
+        const date = document.getElementById('date-input').value;
+        
+        if (!amount || amount <= 0) {
+            showToast('请输入有效的收入金额');
+            return;
+        }
+        if (!date) {
+            showToast('请选择日期');
+            return;
+        }
+        
+        sales.push({
+            id: Date.now(),
+            amount,
+            method: selectedMethod,
+            note,
+            date
+        });
+        saveData();
+        showToast('收入记录已保存');
+        
+        // 重置表单
+        document.getElementById('amount-input').value = '';
+        document.getElementById('note-input').value = '';
+    }
+
+    function saveExpense() {
+        const amount = parseFloat(document.getElementById('expense-amount-input').value);
+        const note = document.getElementById('expense-note-input').value.trim();
+        const date = document.getElementById('expense-date-input').value;
+        
+        if (isNaN(amount) || amount <= 0) {
+            showToast('请输入有效的支出金额');
+            return;
+        }
+        if (!date) {
+            showToast('请选择日期');
+            return;
+        }
+        
+        expenses[date] = amount;
+        saveData();
+        showToast('支出记录已保存');
+        renderRecord();
+    }
+
+    // 渲染明细页面
+    function renderDetails() {
+        document.getElementById('page-title').textContent = '明细';
+        let html = `
+            <div class="flex gap-2 mb-4">
+                <button class="detail-tab-btn flex-1 py-2 rounded-lg font-medium ${detailsSubTab === 'sales' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'}" data-sub="sales">收入明细</button>
+                <button class="detail-tab-btn flex-1 py-2 rounded-lg font-medium ${detailsSubTab === 'exp' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'}" data-sub="exp">支出明细</button>
+            </div>
+        `;
+        if (detailsSubTab === 'sales') {
+            const sortedSales = [...sales].sort((a,b)=>new Date(b.date)-new Date(a.date));
+            if(sortedSales.length === 0) {
+                html += `<div class="text-center py-8 text-gray-500">暂无收入记录</div>`;
+            } else {
+                sortedSales.forEach(r=>{
+                    const m = PAYMENT_METHODS.find(x=>x.id === r.method);
+                    html += `
+                        <div class="bg-white rounded-lg border border-gray-200 p-3 mb-3 flex items-center justify-between">
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <span>${m?.icon}</span>
+                                    <span class="font-medium">${m?.name}</span>
+                                </div>
+                                <div class="text-xs text-gray-500 mt-1">${formatDate(r.date)} ${r.note || '无备注'}</div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary">¥${r.amount.toFixed(2)}</span>
+                                ${isToday(r.date) ? `<button class="del-sale-btn text-xs text-red-500" data-id="${r.id}">删除</button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                })
+            }
+        } else {
+            const expList = Object.entries(expenses).map(([d,amt])=>({date:d,amount:amt}));
+            expList.sort((a,b)=>new Date(b.date)-new Date(a.date));
+            if(expList.length === 0) {
+                html += `<div class="text-center py-8 text-gray-500">暂无支出记录</div>`;
+            } else {
+                expList.forEach(r=>{
+                    html += `
+                        <div class="bg-white rounded-lg border border-gray-200 p-3 mb-3 flex items-center justify-between">
+                            <div>
+                                <div class="font-medium">${formatDate(r.date)}</div>
+                                <div class="text-xs text-gray-500 mt-1">当日支出</div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-orange-600">¥${r.amount.toFixed(2)}</span>
+                                ${isToday(r.date) ? `<button class="del-exp-btn text-xs text-red-500" data-date="${r.date}">删除</button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                })
+            }
+        }
+        document.getElementById('app-content').innerHTML = html;
+        // 子tab切换
+        document.querySelectorAll('.detail-tab-btn').forEach(btn=>{
+            btn.onclick = ()=>{
+                detailsSubTab = btn.dataset.sub;
+                renderDetails();
+            }
+        })
+        // 删除当日收入
+        document.querySelectorAll('.del-sale-btn').forEach(btn=>{
+            btn.onclick = ()=>{
+                const id = Number(btn.dataset.id);
+                sales = sales.filter(x=>x.id !== id);
+                saveData();
+                showToast('已删除');
+                renderDetails();
+            }
+        })
+        // 删除当日支出
+        document.querySelectorAll('.del-exp-btn').forEach(btn=>{
+            btn.onclick = ()=>{
+                const d = btn.dataset.date;
+                delete expenses[d];
+                saveData();
+                showToast('已删除');
+                renderDetails();
+            }
+        })
+    }
+
+    // 渲染我的页面
+    function renderMine() {
+        document.getElementById('page-title').textContent = '我的';
+        const html = `
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <span class="text-4xl">🍜</span>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800">${STORE_NAME}</h2>
+                <p class="text-sm text-gray-500">小店经营管家</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+                <h3 class="font-semibold text-gray-800 mb-3">数据备份与恢复</h3>
+                <div class="space-y-3">
+                    <button id="auto-backup-btn" class="w-full py-2 bg-green-50 text-green-700 rounded-lg text-sm font-medium hover:bg-green-100 flex items-center justify-center">
+                        <span class="mr-2">💾</span>
+                        开启自动备份到本地文件
+                    </button>
+                    <p class="text-xs text-gray-500 px-1">开启后，每次记完账自动把最新数据保存到你选定的本地文件，清理缓存也不怕丢。安卓Chrome/Edge支持，iOS仅支持手动导出。</p>
+
+                    <button id="export-all-btn" class="w-full py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200">
+                        立即导出完整备份文件
+                    </button>
+
+                    <button id="restore-btn" class="w-full py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium hover:bg-blue-100">
+                        <span class="mr-2">📂</span>从备份文件恢复数据
+                    </button>
+                    <input type="file" id="restore-file-input" accept=".json" class="hidden">
+
+                    <button id="clear-data-btn" class="w-full py-2 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100">
+                        清空所有数据
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-4 text-center text-xs text-gray-500">
+                <p>📌 建议开启「自动备份」，或者每周手动导出一次备份文件</p>
+                <p>备份文件请妥善保存到微信收藏或手机文件管理器</p>
+                <p class="mt-2">历史数据不可删除，仅当日记录可修改删除</p>
+            </div>
+        `;
+        document.getElementById('app-content').innerHTML = html;
+
+        // 备份相关事件
+        document.getElementById('auto-backup-btn').onclick = async () => {
+            if (!window.showSaveFilePicker) {
+                showToast('你的浏览器不支持自动备份文件');
+                return;
+            }
+            try {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: '萝卜凉心小店备份.json',
+                    types: [{description:'JSON备份文件',accept:{'application/json':['.json']}}]
+                });
+                backupFileHandle = handle;
+                await writeBackupToFile();
+                showToast('✅ 自动备份已开启');
+            } catch(e) {
+                showToast('取消或不支持该功能');
+            }
+        }
+
+        document.getElementById('export-all-btn').onclick = () => {
+            const allData = {sales, expenses, exportDate:getTodayStr(), store:STORE_NAME};
+            const blob = new Blob([JSON.stringify(allData,null,2)],{type:'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `萝卜凉心小店_${getTodayStr()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('备份文件已下载');
+        }
+
+        document.getElementById('restore-btn').onclick = ()=>{
+            document.getElementById('restore-file-input').click();
+        }
+        document.getElementById('restore-file-input').onchange = async (e)=>{
+            const file = e.target.files[0];
+            if(!file) return;
+            const text = await file.text();
+            try{
+                const d = JSON.parse(text);
+                sales = d.sales || [];
+                expenses = d.expenses || {};
+                saveData();
+                showToast('✅ 数据恢复成功！');
+                renderTab();
+            }catch(err){
+                showToast('备份文件损坏，恢复失败');
+            }
+        }
+
+        document.getElementById('clear-data-btn').onclick = ()=>{
+            if(!confirm('确定清空全部数据？无法恢复！')) return;
+            sales = [];
+            expenses = {};
+            saveData();
+            showToast('数据已清空');
+            renderTab();
+        }
+    }
+
+    // 切换标签渲染入口
+    function renderTab() {
+        document.querySelectorAll('.nav-btn').forEach(btn=>{
+            const t = btn.dataset.tab;
+            if(t === currentTab) {
+                btn.classList.add('text-primary');
+                btn.classList.remove('text-gray-500');
+            } else {
+                btn.classList.remove('text-primary');
+                btn.classList.add('text-gray-500');
+            }
+        })
+        if(currentTab === 'dashboard') renderDashboard();
+        else if(currentTab === 'record') renderRecord();
+        else if(currentTab === 'details') renderDetails();
+        else if(currentTab === 'mine') renderMine();
+    }
+
+    // 绑定底部导航
+    function bindNavEvents() {
+        document.querySelectorAll('.nav-btn').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                currentTab = btn.dataset.tab;
+                renderTab();
+            })
+        })
+    }
+
+    init();
+</script>
+<div id="luobo-oj-ad" style="position:fixed;bottom:16px;right:16px;width:260px;background:#252526;color:#fff;padding:14px;border-radius:10px;box-shadow:0 4px 16px #0004;z-index:999;">
+  <span onclick="document.getElementById('luobo-oj-ad').style.display='none'" style="position:absolute;top:8px;right:10px;font-size:20px;cursor:pointer;color:#aaa;">×</span>
+  <a href="https://4madtug83etp8.doubao.link/app/app_17gr0snf4cw" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+    <div style="font-size:16px;font-weight:bold;">🥕萝卜OJ</div>
+    <div style="font-size:13px;color:#cccccc;margin-top:4px;">信奥在线刷题平台<br>C++ / Python 在线评测，深色免登录</div>
+    <div style="margin-top:8px;font-size:13px;color:#58a6ff;">👉 立即前往</div>
+  </a>
+</div>
+
+</body>
+</html>
